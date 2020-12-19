@@ -17,7 +17,6 @@ curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
 $html_to_parse= curl_exec($ch);
 //dump the data.
 //var_dump($html_to_parse);
-
 //Get all the elements of h1.
 $dom= new DOMDocument();
 @ $dom->loadHTML($html_to_parse);
