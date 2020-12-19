@@ -21,17 +21,20 @@ $html_to_parse= curl_exec($ch);
 $dom= new DOMDocument();
 @ $dom->loadHTML($html_to_parse);
 
-$html_tags_to_check= array("head","title","h1","p","a","img");
+$html_tags_to_check= array("a");
 
 foreach($html_tags_to_check as $each_tag){
 	$all_tag_data= $dom->getElementsByTagName($each_tag);
 	$tag_array= array();
 	foreach($all_tag_data as $tag_data){
 		$tag_array[]= $tag_data->textContent;
+		$tag_link_array[]= $tag_data->getAttribute( 'href' );
 	}
 	if(count($tag_array) > 0){
 		echo "<br>".strtoupper($each_tag)." Tag Contents are as below<br>";
 		print_r($tag_array);
+		echo "<br> link as :";
+		print_r($tag_link_array);
 		"<br>";
 	}else{
 		echo "<br> No conntent found for ".strtoupper($each_tag)." Tag<br>";
