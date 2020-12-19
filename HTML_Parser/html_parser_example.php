@@ -21,11 +21,22 @@ $html_to_parse= curl_exec($ch);
 $dom= new DOMDocument();
 @ $dom->loadHTML($html_to_parse);
 
-$all_h1= $dom->getElementsByTagName('h1');
-$h1_array= array();
-foreach($all_h1 as $h1){
-	$h1_array[]= $h1->textContent;
-	print_r($h1_array);
+$html_tags_to_check= array("head","title","h1","p","a","img");
+
+foreach($html_tags_to_check as $each_tag){
+	$all_tag_data= $dom->getElementsByTagName($each_tag);
+	$tag_array= array();
+	foreach($all_tag_data as $tag_data){
+		$tag_array[]= $tag_data->textContent;
+	}
+	if(count($tag_array) > 0){
+		echo "<br>".strtoupper($each_tag)." Tag Contents are as below<br>";
+		print_r($tag_array);
+		"<br>";
+	}else{
+		echo "<br> No conntent found for ".strtoupper($each_tag)." Tag<br>";
+	}
+	
 }
 
 
